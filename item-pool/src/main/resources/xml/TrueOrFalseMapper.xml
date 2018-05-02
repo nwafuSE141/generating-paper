@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.itempool.mapper.TrueOrFalseMapper">
+  <resultMap id="BaseResultMap" type="com.nwafu.itempool.beans.TrueOrFalse">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question" jdbcType="VARCHAR" property="question" />
+    <result column="answer" jdbcType="CHAR" property="answer" />
+    <result column="difficult" jdbcType="CHAR" property="difficult" />
+    <result column="faq" jdbcType="VARCHAR" property="faq" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="usage_count" jdbcType="INTEGER" property="usageCount" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="point_id" jdbcType="INTEGER" property="pointId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="stat" jdbcType="INTEGER" property="stat" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question, answer, difficult, faq, score, usage_count, course_id, point_id, user_id, 
+    stat, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from true_or_false
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from true_or_false
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nwafu.itempool.beans.TrueOrFalse">
+    insert into true_or_false (id, question, answer, 
+      difficult, faq, score, 
+      usage_count, course_id, point_id, 
+      user_id, stat, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=CHAR}, 
+      #{difficult,jdbcType=CHAR}, #{faq,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{usageCount,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{pointId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{stat,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nwafu.itempool.beans.TrueOrFalse">
+    insert into true_or_false
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="question != null">
+        question,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="difficult != null">
+        difficult,
+      </if>
+      <if test="faq != null">
+        faq,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="usageCount != null">
+        usage_count,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="pointId != null">
+        point_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="stat != null">
+        stat,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="question != null">
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=CHAR},
+      </if>
+      <if test="difficult != null">
+        #{difficult,jdbcType=CHAR},
+      </if>
+      <if test="faq != null">
+        #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="usageCount != null">
+        #{usageCount,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="stat != null">
+        #{stat,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nwafu.itempool.beans.TrueOrFalse">
+    update true_or_false
+    <set>
+      <if test="question != null">
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=CHAR},
+      </if>
+      <if test="difficult != null">
+        difficult = #{difficult,jdbcType=CHAR},
+      </if>
+      <if test="faq != null">
+        faq = #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="usageCount != null">
+        usage_count = #{usageCount,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        point_id = #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="stat != null">
+        stat = #{stat,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nwafu.itempool.beans.TrueOrFalse">
+    update true_or_false
+    set question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=CHAR},
+      difficult = #{difficult,jdbcType=CHAR},
+      faq = #{faq,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      usage_count = #{usageCount,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      point_id = #{pointId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      stat = #{stat,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
