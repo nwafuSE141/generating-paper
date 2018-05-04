@@ -1,12 +1,19 @@
 package com.nwafu.organizepaper.controller;
 
+import com.nwafu.itempool.beans.Paper;
+import com.nwafu.itempool.beans.PaperInfo;
+import com.nwafu.itempool.beans.SingleChoic;
 import com.nwafu.organizepaper.service.*;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +39,12 @@ public class OrganizationController {
     @Autowired
     private QuesAndAnsService quesAndAnsService;
 
+    @Autowired
+    private PaperService paperService;
+
+    @Autowired
+    private PaperInfoService paperInfoService;
+
     @PostMapping("/getquestions")
     public Object getQuestions(Integer type) {
         Map<String, Object> map = new HashMap<>();
@@ -47,18 +60,118 @@ public class OrganizationController {
             map.put("data", fillBlankService.getFillBlankQuestion());
             map.put("stat", "ok");
             return map;
-        } else if (type == 10004){
-            map.put("data",trueOrFalseServicel.getTrueOrFalseQuestion());
-            map.put("stat","ok");
+        } else if (type == 10004) {
+            map.put("data", trueOrFalseServicel.getTrueOrFalseQuestion());
+            map.put("stat", "ok");
             return map;
-        } else if (type == 10005){
+        } else if (type == 10005) {
             map.put("data", quesAndAnsService.getQuesAndAnsQuestions());
             map.put("stat", "ok");
             return map;
-        }
-        else {
+        } else {
             return map.put("stat", "no");
         }
+
+    }
+
+
+    @PostMapping("/addpaper")
+    public Object addPaper(@RequestBody int[][] questList) {
+
+        int sumScore = 0;
+        int serialnum = 0;
+        int userId = questList[0][0];
+        int[] singleIds = questList[1];
+        int[] multipleIds = questList[2];
+        int[] fillBlankIds = questList[3];
+        int[] trueOrFalseIds = questList[4];
+        int[] quesAndAnsIds = questList[5];
+
+        List<PaperInfo> paperInfoList = new ArrayList<>();
+
+        //校验
+        if (singleIds.length != 10) {
+            JSONObject object = new JSONObject();
+            object.element("stat","no");
+            object.element("msg","选择题是数量不为10");
+        }
+
+        //插入paper
+        Paper paper = new Paper();
+        paper.setCreatorId(userId);
+        paper.setName("VB");
+        paperService.insertSelective(paper);
+        int paperId = paper.getId();
+
+        //组织单选题
+
+        /**
+         *     public PaperInfo(int paperId, int serialnum, int typeId, int questionId) {
+         *         this.typeId = paperId;
+         *         this.serialNumber = serialnum;
+         *         this.typeId = typeId;
+         *         this.questionId = questionId;
+         *     }
+         */
+
+        for (int questionId : singleIds) {
+            serialnum++;
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setPaperId(paperId);
+            paperInfo.setSerialNumber(serialnum);
+            paperInfo.setTypeId(10001);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+        }
+
+        //组织多选题
+        for (int questionId : multipleIds) {
+            serialnum++;
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setPaperId(paperId);
+            paperInfo.setSerialNumber(serialnum);
+            paperInfo.setTypeId(10002);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+        }
+
+        //组织填空题
+        for (int questionId : fillBlankIds) {
+            serialnum++;
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setPaperId(paperId);
+            paperInfo.setSerialNumber(serialnum);
+            paperInfo.setTypeId(10003);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+        }
+
+        //组织判断题
+
+        for (int questionId : trueOrFalseIds) {
+            serialnum++;
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setPaperId(paperId);
+            paperInfo.setSerialNumber(serialnum);
+            paperInfo.setTypeId(10004);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+        }
+
+        //组织问答题
+        for (int questionId : quesAndAnsIds) {
+            serialnum++;
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setPaperId(paperId);
+            paperInfo.setSerialNumber(serialnum);
+            paperInfo.setTypeId(10005);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+        }
+
+        paperInfoService.insertList(paperInfoList);
+
+        return "no";
 
     }
 }

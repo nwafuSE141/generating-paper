@@ -5,6 +5,8 @@ import com.nwafu.itempool.mapper.PaperMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author TinChiWay
  * @data 2018/5/2
@@ -24,4 +26,7 @@ public class PaperService {
     }
 
 
+    public List<Paper> getPaperWithUserId(int userId) {
+        return paperMapper.selectWithUserId(userId);
+    }
 }

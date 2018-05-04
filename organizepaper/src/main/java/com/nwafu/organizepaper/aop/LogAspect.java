@@ -63,7 +63,7 @@ public class LogAspect {
     //后置异常通知
     @AfterThrowing(throwing = "ex", pointcut = "webLog()")
     public void throwss(JoinPoint jp, Exception ex){
-        logger.info("方法异常时执行.....");
+        logger.info("方法执行时异常.....");
     }
 
     private String getRequestPayload(HttpServletRequest req) {
