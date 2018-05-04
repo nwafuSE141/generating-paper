@@ -6,14 +6,14 @@ import com.nwafu.itempool.beans.TrueOrFalse;
  * @author TinChiWay
  * @data 2018/5/4
  */
-public class TrueOrFalseModel {
+public class TrueOrFalseViewModel {
     private int  serialNumber;
     private String question;
     private String answer;
     private int score;
     private int id;
 
-    public TrueOrFalseModel(TrueOrFalse trueOrFalse) {
+    public TrueOrFalseViewModel(TrueOrFalse trueOrFalse) {
         this.id = trueOrFalse.getId();
         this.question = trueOrFalse.getQuestion();
         this.answer = trueOrFalse.getAnswer();

@@ -1,12 +1,10 @@
 package com.nwafu.itempool.model;
 
-import com.nwafu.itempool.beans.MultipleChoice;
+import com.nwafu.itempool.beans.SingleChoic;
 
-/**
- * @author TinChiWay
- * @data 2018/5/4
- */
-public class MultipleChoiceModel {
+
+public class SingleChoicViewModel {
+
     private int  serialNumber;
     private int id;
     private String question;
@@ -16,27 +14,19 @@ public class MultipleChoiceModel {
     private String b;
     private String c;
     private String d;
-    private String e;
 
-    public MultipleChoiceModel(MultipleChoice multipleChoice) {
-        this.id = multipleChoice.getId();
-        this.question = multipleChoice.getQuestion();
-        this.answer = multipleChoice.getAnswer();
-        this.score = multipleChoice.getScore();
-        this.a = multipleChoice.getA();
-        this.b = multipleChoice.getB();
-        this.c = multipleChoice.getC();
-        this.d = multipleChoice.getD();
-        this.e =multipleChoice.getE();
+
+    public SingleChoicViewModel(SingleChoic singleChoic) {
+        this.question = singleChoic.getQuestion();
+        this.answer = singleChoic.getAnswer();
+        this.score = singleChoic.getScore();
+        this.id = singleChoic.getId();
+        this.a = singleChoic.getA();
+        this.b = singleChoic.getB();
+        this.c = singleChoic.getC();
+        this.d = singleChoic.getD();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
     public int getSerialNumber() {
         return serialNumber;
     }
@@ -61,7 +51,7 @@ public class MultipleChoiceModel {
         this.answer = answer;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
@@ -99,13 +89,5 @@ public class MultipleChoiceModel {
 
     public void setD(String d) {
         this.d = d;
-    }
-
-    public String getE() {
-        return e;
-    }
-
-    public void setE(String e) {
-        this.e = e;
     }
 }

@@ -1,23 +1,23 @@
 package com.nwafu.itempool.model;
 
-import com.nwafu.itempool.beans.FillBlank;
+import com.nwafu.itempool.beans.QuesAndAns;
 
 /**
  * @author TinChiWay
  * @data 2018/5/4
  */
-public class FillBlankModel {
-    private int  serialNumber;
+public class QuesAndAnsViewModel {
     private int id;
+    private int  serialNumber;
     private String question;
     private String answer;
     private int score;
 
-    public FillBlankModel(FillBlank fillBlank) {
-        this.id = fillBlank.getId();
-        this.question = fillBlank.getQuestion();
-        this.answer = fillBlank.getAnswer();
-        this.score = fillBlank.getScore();
+    public QuesAndAnsViewModel(QuesAndAns quesAndAns) {
+        this.id = quesAndAns.getId();
+        this.question = quesAndAns.getQuestion();
+        this.answer = quesAndAns.getAnswer();
+        this.score = quesAndAns.getScore();
     }
 
     public int getId() {
