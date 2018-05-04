@@ -1,7 +1,6 @@
 package com.nwafu.organizepaper.controller;
 
-import com.nwafu.organizepaper.service.MultipleChoiceService;
-import com.nwafu.organizepaper.service.SingleChoiceService;
+import com.nwafu.organizepaper.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +23,15 @@ public class OrganizationController {
     @Autowired
     private MultipleChoiceService multipleChoiceService;
 
+    @Autowired
+    private FillBlankService fillBlankService;
+
+    @Autowired
+    private TrueOrFalseService trueOrFalseServicel;
+
+    @Autowired
+    private QuesAndAnsService quesAndAnsService;
+
     @PostMapping("/getquestions")
     public Object getQuestions(Integer type) {
         Map<String, Object> map = new HashMap<>();
@@ -33,9 +41,22 @@ public class OrganizationController {
             return map;
         } else if (type == 10002) {
             map.put("data", multipleChoiceService.getMultipleQuestions());
+            map.put("stat", "ok");
+            return map;
+        } else if (type == 10003) {
+            map.put("data", fillBlankService.getFillBlankQuestion());
+            map.put("stat", "ok");
+            return map;
+        } else if (type == 10004){
+            map.put("data",trueOrFalseServicel.getTrueOrFalseQuestion());
             map.put("stat","ok");
             return map;
-        } else {
+        } else if (type == 10005){
+            map.put("data", quesAndAnsService.getQuesAndAnsQuestions());
+            map.put("stat", "ok");
+            return map;
+        }
+        else {
             return map.put("stat", "no");
         }
 

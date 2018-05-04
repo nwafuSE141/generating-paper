@@ -18,4 +18,6 @@ public interface TrueOrFalseMapper {
     int updateByPrimaryKeySelective(TrueOrFalse record);
 
     int updateByPrimaryKey(TrueOrFalse record);
+
+    List<TrueOrFalse> selectAll();
 }

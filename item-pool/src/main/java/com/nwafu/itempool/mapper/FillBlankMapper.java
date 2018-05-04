@@ -18,4 +18,6 @@ public interface FillBlankMapper {
     int updateByPrimaryKeySelective(FillBlank record);
 
     int updateByPrimaryKey(FillBlank record);
+
+    List<FillBlank> selectAll();
 }
