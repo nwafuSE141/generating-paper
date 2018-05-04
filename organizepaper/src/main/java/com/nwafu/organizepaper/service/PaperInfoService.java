@@ -3,6 +3,9 @@ package com.nwafu.organizepaper.service;
 import com.nwafu.itempool.beans.*;
 import com.nwafu.itempool.mapper.*;
 import com.nwafu.itempool.model.*;
+import com.nwafu.organizepaper.controller.PaperController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,8 @@ import java.util.Map;
  */
 @Service
 public class PaperInfoService {
+    protected static final Logger logger = LoggerFactory.getLogger(PaperInfoService.class);
+
     @Autowired
     private PaperInfoMapper paperInfoMapper;
 

@@ -8,14 +8,24 @@ import com.nwafu.itempool.beans.FillBlank;
  */
 public class FillBlankModel {
     private int  serialNumber;
+    private int id;
     private String question;
     private String answer;
     private int score;
 
     public FillBlankModel(FillBlank fillBlank) {
+        this.id = fillBlank.getId();
         this.question = fillBlank.getQuestion();
         this.answer = fillBlank.getAnswer();
         this.score = fillBlank.getScore();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSerialNumber() {

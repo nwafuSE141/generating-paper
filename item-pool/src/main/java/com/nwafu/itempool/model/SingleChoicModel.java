@@ -6,6 +6,7 @@ import com.nwafu.itempool.beans.SingleChoic;
 public class SingleChoicModel  {
 
     private int  serialNumber;
+    private int id;
     private String question;
     private String answer;
     private int score;
@@ -19,6 +20,7 @@ public class SingleChoicModel  {
         this.question = singleChoic.getQuestion();
         this.answer = singleChoic.getAnswer();
         this.score = singleChoic.getScore();
+        this.id = singleChoic.getId();
         this.a = singleChoic.getA();
         this.b = singleChoic.getB();
         this.c = singleChoic.getC();

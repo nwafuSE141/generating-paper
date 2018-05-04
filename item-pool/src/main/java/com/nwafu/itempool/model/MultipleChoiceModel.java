@@ -8,6 +8,7 @@ import com.nwafu.itempool.beans.MultipleChoice;
  */
 public class MultipleChoiceModel {
     private int  serialNumber;
+    private int id;
     private String question;
     private String answer;
     private int score;
@@ -18,6 +19,7 @@ public class MultipleChoiceModel {
     private String e;
 
     public MultipleChoiceModel(MultipleChoice multipleChoice) {
+        this.id = multipleChoice.getId();
         this.question = multipleChoice.getQuestion();
         this.answer = multipleChoice.getAnswer();
         this.score = multipleChoice.getScore();
@@ -28,6 +30,13 @@ public class MultipleChoiceModel {
         this.e =multipleChoice.getE();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getSerialNumber() {
         return serialNumber;
     }

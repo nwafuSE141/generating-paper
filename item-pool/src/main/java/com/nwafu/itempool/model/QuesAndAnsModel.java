@@ -7,15 +7,25 @@ import com.nwafu.itempool.beans.QuesAndAns;
  * @data 2018/5/4
  */
 public class QuesAndAnsModel {
+    private int id;
     private int  serialNumber;
     private String question;
     private String answer;
     private int score;
 
     public QuesAndAnsModel(QuesAndAns quesAndAns) {
+        this.id = quesAndAns.getId();
         this.question = quesAndAns.getQuestion();
         this.answer = quesAndAns.getAnswer();
         this.score = quesAndAns.getScore();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSerialNumber() {

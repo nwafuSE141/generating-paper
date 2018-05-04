@@ -2,6 +2,8 @@ package com.nwafu.organizepaper.controller;
 
 import com.nwafu.itempool.model.PaperInfoModel;
 import com.nwafu.organizepaper.service.PaperInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +20,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/paperinfo")
 public class PaperInfoController {
+    protected static final Logger logger = LoggerFactory.getLogger(PaperController.class);
 
     @Autowired
     private PaperInfoService paperInfoService;
 
     @PostMapping("getpapercompleteinfo")
-    public Map getPapercompleteInfo(int paperId){
+    public Object getPapercompleteInfo(int paperId){
+        logger.info("get papercompleteInfo at: " + paperId);
         Map<String, Object> map = new HashMap<>();
+
        PaperInfoModel model = paperInfoService.getPapercompleteInfo(paperId);
        map.put("stat","ok");
        map.put("data",model);

@@ -11,11 +11,21 @@ public class TrueOrFalseModel {
     private String question;
     private String answer;
     private int score;
+    private int id;
 
     public TrueOrFalseModel(TrueOrFalse trueOrFalse) {
+        this.id = trueOrFalse.getId();
         this.question = trueOrFalse.getQuestion();
         this.answer = trueOrFalse.getAnswer();
         this.score = trueOrFalse.getScore();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSerialNumber() {
