@@ -83,4 +83,7 @@ public class PaperInfoService {
 
     }
 
+    public int insertList(List<PaperInfo> paperInfoList) {
+        return paperInfoMapper.insertList(paperInfoList);
+    }
 }

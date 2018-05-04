@@ -20,4 +20,6 @@ public interface PaperInfoMapper {
     int updateByPrimaryKey(PaperInfo record);
 
     List getPaperInfo(Integer paperId);
+
+    int insertList(List<PaperInfo> paperInfoList);
 }

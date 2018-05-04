@@ -34,4 +34,7 @@ public class SingleChoiceService {
         return listMap;
     }
 
+    public SingleChoic getSingleById(int id) {
+        return singleChoicMapper.selectByPrimaryKey(id);
+    }
 }
