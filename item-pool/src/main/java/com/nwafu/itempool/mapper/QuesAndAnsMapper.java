@@ -18,4 +18,6 @@ public interface QuesAndAnsMapper {
     int updateByPrimaryKeySelective(QuesAndAns record);
 
     int updateByPrimaryKey(QuesAndAns record);
+
+    List<QuesAndAns> selectAll();
 }
