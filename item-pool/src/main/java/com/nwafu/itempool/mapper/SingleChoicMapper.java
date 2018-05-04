@@ -18,4 +18,6 @@ public interface SingleChoicMapper {
     int updateByPrimaryKeySelective(SingleChoic record);
 
     int updateByPrimaryKey(SingleChoic record);
+
+    List<SingleChoic> selectAll();
 }

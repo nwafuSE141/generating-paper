@@ -18,4 +18,6 @@ public interface MultipleChoiceMapper {
     int updateByPrimaryKeySelective(MultipleChoice record);
 
     int updateByPrimaryKey(MultipleChoice record);
+
+    List<MultipleChoice> selectAll();
 }
