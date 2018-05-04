@@ -18,4 +18,6 @@ public interface PaperInfoMapper {
     int updateByPrimaryKeySelective(PaperInfo record);
 
     int updateByPrimaryKey(PaperInfo record);
+
+    List getPaperInfo(Integer paperId);
 }

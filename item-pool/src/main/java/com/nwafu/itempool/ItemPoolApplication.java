@@ -1,11 +1,6 @@
 package com.nwafu.itempool;
 
-import com.nwafu.itempool.beans.Chapter;
-import com.nwafu.itempool.beans.Course;
 import com.nwafu.itempool.mapper.ChapterMapper;
-import com.nwafu.itempool.mapper.CourseMapper;
-import com.nwafu.itempool.mapper.FillBlankMapper;
-import com.nwafu.itempool.mapper.PaperMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
