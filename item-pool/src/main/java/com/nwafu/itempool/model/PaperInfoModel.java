@@ -9,11 +9,11 @@ import java.util.List;
  */
 public class PaperInfoModel {
 
-    List<SingleChoicModel> singleChoicList = new ArrayList<>();
-    List<MultipleChoiceModel> multipleChoicList = new ArrayList<>();
-    List<FillBlankModel> fillBlankList = new ArrayList<>();
-    List<TrueOrFalseModel>trueOrFalseList = new ArrayList<>();
-    List<QuesAndAnsModel>quesAndAnsList = new ArrayList<>();
+    List<SingleChoicViewModel> singleChoicList = new ArrayList<>();
+    List<MultipleChoiceViewModel> multipleChoicList = new ArrayList<>();
+    List<FillBlankViewModel> fillBlankList = new ArrayList<>();
+    List<TrueOrFalseViewModel>trueOrFalseList = new ArrayList<>();
+    List<QuesAndAnsViewModel>quesAndAnsList = new ArrayList<>();
     int singleChoicScore = 0;
     int multipleChoicScore = 0;
     int fillBlankScore = 0;
@@ -22,31 +22,31 @@ public class PaperInfoModel {
     int sumScore = 0;
 
 
-    public void addSingChioice(SingleChoicModel model) {
+    public void addSingChioice(SingleChoicViewModel model) {
         this.singleChoicList.add(model);
         this.singleChoicScore += model.getScore();
         this.sumScore += model.getScore();
     }
 
-    public void addMultipleChoice(MultipleChoiceModel model) {
+    public void addMultipleChoice(MultipleChoiceViewModel model) {
         this.multipleChoicList.add(model);
         this.multipleChoicScore += model.getScore();
         this.sumScore += model.getScore();
     }
 
-    public void addFillBlank(FillBlankModel model) {
+    public void addFillBlank(FillBlankViewModel model) {
         this.fillBlankList.add(model);
         this.fillBlankScore += model.getScore();
         this.sumScore += model.getScore();
     }
 
-    public void addTrueOrFalse(TrueOrFalseModel model) {
+    public void addTrueOrFalse(TrueOrFalseViewModel model) {
         this.trueOrFalseList.add(model);
         this.trueOrFalseScore += model.getScore();
         this.sumScore += model.getScore();
     }
 
-    public void addQuesAndAns(QuesAndAnsModel model) {
+    public void addQuesAndAns(QuesAndAnsViewModel model) {
         this.quesAndAnsList.add(model);
         this.quesAndAnsScore += model.getScore();
         this.sumScore += model.getScore();
@@ -60,43 +60,43 @@ public class PaperInfoModel {
         this.sumScore = sumScore;
     }
 
-    public List<SingleChoicModel> getSingleChoicList() {
+    public List<SingleChoicViewModel> getSingleChoicList() {
         return singleChoicList;
     }
 
-    public void setSingleChoicList(List<SingleChoicModel> singleChoicList) {
+    public void setSingleChoicList(List<SingleChoicViewModel> singleChoicList) {
         this.singleChoicList = singleChoicList;
     }
 
-    public List<MultipleChoiceModel> getMultipleChoicList() {
+    public List<MultipleChoiceViewModel> getMultipleChoicList() {
         return multipleChoicList;
     }
 
-    public void setMultipleChoicList(List<MultipleChoiceModel> multipleChoicList) {
+    public void setMultipleChoicList(List<MultipleChoiceViewModel> multipleChoicList) {
         this.multipleChoicList = multipleChoicList;
     }
 
-    public List<FillBlankModel> getFillBlankList() {
+    public List<FillBlankViewModel> getFillBlankList() {
         return fillBlankList;
     }
 
-    public void setFillBlankList(List<FillBlankModel> fillBlankList) {
+    public void setFillBlankList(List<FillBlankViewModel> fillBlankList) {
         this.fillBlankList = fillBlankList;
     }
 
-    public List<TrueOrFalseModel> getTrueOrFalseList() {
+    public List<TrueOrFalseViewModel> getTrueOrFalseList() {
         return trueOrFalseList;
     }
 
-    public void setTrueOrFalseList(List<TrueOrFalseModel> trueOrFalseList) {
+    public void setTrueOrFalseList(List<TrueOrFalseViewModel> trueOrFalseList) {
         this.trueOrFalseList = trueOrFalseList;
     }
 
-    public List<QuesAndAnsModel> getQuesAndAnsList() {
+    public List<QuesAndAnsViewModel> getQuesAndAnsList() {
         return quesAndAnsList;
     }
 
-    public void setQuesAndAnsList(List<QuesAndAnsModel> quesAndAnsList) {
+    public void setQuesAndAnsList(List<QuesAndAnsViewModel> quesAndAnsList) {
         this.quesAndAnsList = quesAndAnsList;
     }
 

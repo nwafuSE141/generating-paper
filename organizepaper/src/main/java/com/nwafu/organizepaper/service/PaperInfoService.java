@@ -3,15 +3,12 @@ package com.nwafu.organizepaper.service;
 import com.nwafu.itempool.beans.*;
 import com.nwafu.itempool.mapper.*;
 import com.nwafu.itempool.model.*;
-import com.nwafu.organizepaper.controller.PaperController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author TinChiWay
@@ -52,31 +49,31 @@ public class PaperInfoService {
         for (PaperInfo info : infoList){
             if (info.getTypeId() == 10001){
                 SingleChoic singleChoic = singleChoicMapper.selectByPrimaryKey(info.getQuestionId());
-                SingleChoicModel model = new SingleChoicModel(singleChoic);
+                SingleChoicViewModel model = new SingleChoicViewModel(singleChoic);
                 model.setSerialNumber(info.getSerialNumber());
                 paperInfoModel.addSingChioice(model);
             }
             if (info.getTypeId() == 10002){
                 MultipleChoice multipleChoice = multipleChoiceMapper.selectByPrimaryKey(info.getQuestionId());
-                MultipleChoiceModel model = new MultipleChoiceModel(multipleChoice);
+                MultipleChoiceViewModel model = new MultipleChoiceViewModel(multipleChoice);
                 model.setSerialNumber(info.getSerialNumber());
                 paperInfoModel.addMultipleChoice(model);
             }
             if (info.getTypeId() == 10003){
                 FillBlank fillBlank = fillBlankMapper.selectByPrimaryKey(info.getQuestionId());
-                FillBlankModel model = new FillBlankModel(fillBlank);
+                FillBlankViewModel model = new FillBlankViewModel(fillBlank);
                 model.setSerialNumber(info.getSerialNumber());
                 paperInfoModel.addFillBlank(model);
             }
             if (info.getTypeId() == 10004){
                 TrueOrFalse trueOrFalse = trueOrFalseMapper.selectByPrimaryKey(info.getQuestionId());
-                TrueOrFalseModel model = new TrueOrFalseModel(trueOrFalse);
+                TrueOrFalseViewModel model = new TrueOrFalseViewModel(trueOrFalse);
                 model.setSerialNumber(info.getSerialNumber());
                 paperInfoModel.addTrueOrFalse(model);
             }
             if (info.getTypeId() == 10005){
                 QuesAndAns quesAndAns = quesAndAnsMapper.selectByPrimaryKey(info.getQuestionId());
-                QuesAndAnsModel model = new QuesAndAnsModel(quesAndAns);
+                QuesAndAnsViewModel model = new QuesAndAnsViewModel(quesAndAns);
                 model.setSerialNumber(info.getSerialNumber());
                 paperInfoModel.addQuesAndAns(model);
             }
