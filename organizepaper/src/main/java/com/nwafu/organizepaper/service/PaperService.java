@@ -5,6 +5,7 @@ import com.nwafu.itempool.mapper.PaperMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -27,6 +28,13 @@ public class PaperService {
 
 
     public List<Paper> getPaperWithUserId(int userId) {
-        return paperMapper.selectWithUserId(userId);
+        List<Paper> list = paperMapper.selectWithUserId(userId);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (Paper paper : list){
+            String data = dateFormat.format(paper.getCreateTime());
+            paper.setCreateTimeFormat(data);
+        }
+
+        return list;
     }
 }

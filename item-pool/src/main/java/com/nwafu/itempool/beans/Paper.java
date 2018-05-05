@@ -1,5 +1,6 @@
 package com.nwafu.itempool.beans;
 
+
 import java.util.Date;
 
 public class Paper {
@@ -17,7 +18,17 @@ public class Paper {
 
     private Date createTime;
 
+    private String createTimeFormat;
+
     private Integer state;
+
+    public String getCreateTimeFormat() {
+        return createTimeFormat;
+    }
+
+    public void setCreateTimeFormat(String createTimeFormat) {
+        this.createTimeFormat = createTimeFormat;
+    }
 
     public Integer getId() {
         return id;

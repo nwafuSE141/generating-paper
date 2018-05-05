@@ -1,8 +1,10 @@
 package com.nwafu.organizepaper.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.nwafu.itempool.beans.Paper;
 import com.nwafu.itempool.beans.PaperInfo;
 import com.nwafu.itempool.beans.SingleChoic;
+import com.nwafu.itempool.model.AddPaperListModel;
 import com.nwafu.organizepaper.service.*;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,44 +78,38 @@ public class OrganizationController {
 
 
     @PostMapping("/addpaper")
-    public Object addPaper(@RequestBody int[][] questList) {
+    public Object addPaper(@RequestBody AddPaperListModel questlist) {
+
 
         int sumScore = 0;
         int serialnum = 0;
-        int userId = questList[0][0];
-        int[] singleIds = questList[1];
-        int[] multipleIds = questList[2];
-        int[] fillBlankIds = questList[3];
-        int[] trueOrFalseIds = questList[4];
-        int[] quesAndAnsIds = questList[5];
+        int userId = questlist.getUserid();
+        String papername = questlist.getName();
+        List<Integer> singleIds = questlist.getSingleSelect();
+        List<Integer> multipleIds = questlist.getMultipleSelect();
+        List<Integer> fillBlankIds = questlist.getFillblank();
+        List<Integer> trueOrFalseIds = questlist.getTureorfalse();
+        List<Integer> quesAndAnsIds = questlist.getQuesAndAns();
 
         List<PaperInfo> paperInfoList = new ArrayList<>();
 
         //校验
-        if (singleIds.length != 10) {
-            JSONObject object = new JSONObject();
-            object.element("stat","no");
-            object.element("msg","选择题是数量不为10");
-        }
+        /**
+         * if (singleIds.size() != 10) {
+         *             JSONObject object = new JSONObject();
+         *             object.element("stat","no");
+         *             object.element("msg","选择题是数量不为10");
+         *         }
+         */
 
         //插入paper
         Paper paper = new Paper();
         paper.setCreatorId(userId);
-        paper.setName("VB");
+        paper.setName(papername);
         paperService.insertSelective(paper);
         int paperId = paper.getId();
 
         //组织单选题
-
-        /**
-         *     public PaperInfo(int paperId, int serialnum, int typeId, int questionId) {
-         *         this.typeId = paperId;
-         *         this.serialNumber = serialnum;
-         *         this.typeId = typeId;
-         *         this.questionId = questionId;
-         *     }
-         */
-
         for (int questionId : singleIds) {
             serialnum++;
             PaperInfo paperInfo = new PaperInfo();
@@ -169,9 +165,12 @@ public class OrganizationController {
             paperInfoList.add(paperInfo);
         }
 
-        paperInfoService.insertList(paperInfoList);
+        int res = paperInfoService.insertList(paperInfoList);
 
-        return "no";
-
+        if (res > 0) {
+            return new JSONObject().element("stat", "ok");
+        } else {
+            return "no";
+        }
     }
 }

@@ -21,5 +21,5 @@ public interface PaperInfoMapper {
 
     List getPaperInfo(Integer paperId);
 
-    int insertList(List<PaperInfo> paperInfoList);
+    int insertList(@Param("paperInfoList") List<PaperInfo> paperInfoList);
 }

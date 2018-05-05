@@ -20,6 +20,10 @@ spring:
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
 
+#    jackson:
+#      date-format: yyyy-MM-dd HH:mm:ss
+#      time-zone: GMT+8
+
 pagehelper:
   helperDialect: mysql
   reasonable: true

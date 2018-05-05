@@ -26,7 +26,7 @@ public class PaperController {
         return paperService.deleteByPrimaryKey(id);
     }
 
-    @PostMapping("/getpapers")
+    @PostMapping("/getpaperwithid")
     public Object getpapersWithUserId(int userId){
        JSONObject jsonObject = new JSONObject();
 
