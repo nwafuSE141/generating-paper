@@ -1,5 +1,6 @@
 package com.nwafu.organizepaper.service;
 
+import com.nwafu.itempool.beans.TrueOrFalse;
 import com.nwafu.itempool.mapper.TrueOrFalseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,7 @@ public class TrueOrFalseService {
         return trueOrFalseMapper.selectAll();
     }
 
+    public TrueOrFalse getTrueOrFalseById(int id) {
+        return trueOrFalseMapper.selectByPrimaryKey(id);
+    }
 }

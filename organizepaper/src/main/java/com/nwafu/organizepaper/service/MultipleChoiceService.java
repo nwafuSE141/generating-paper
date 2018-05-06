@@ -39,4 +39,8 @@ public class MultipleChoiceService {
         return listMap;
 
     }
+
+    public MultipleChoice getMultipleById(int id) {
+        return multipleChoiceMapper.selectByPrimaryKey(id);
+    }
 }

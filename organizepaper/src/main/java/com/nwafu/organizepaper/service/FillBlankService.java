@@ -1,5 +1,6 @@
 package com.nwafu.organizepaper.service;
 
+import com.nwafu.itempool.beans.FillBlank;
 import com.nwafu.itempool.mapper.FillBlankMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,9 @@ public class FillBlankService {
 
     public List getFillBlankQuestion(){
         return fillBlankMapper.selectAll();
+    }
+
+    public FillBlank getFillBlankById(int id) {
+        return fillBlankMapper.selectByPrimaryKey(id);
     }
 }
