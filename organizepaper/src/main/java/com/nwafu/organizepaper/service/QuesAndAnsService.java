@@ -1,5 +1,6 @@
 package com.nwafu.organizepaper.service;
 
+import com.nwafu.itempool.beans.QuesAndAns;
 import com.nwafu.itempool.mapper.QuesAndAnsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,7 @@ public class QuesAndAnsService {
         return quesAndAnsMapper.selectAll();
     }
 
+    public QuesAndAns getQuesAndAnsById(int id) {
+        return quesAndAnsMapper.selectByPrimaryKey(id);
+    }
 }

@@ -1,9 +1,7 @@
 package com.nwafu.organizepaper.controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.nwafu.itempool.beans.Paper;
 import com.nwafu.itempool.beans.PaperInfo;
-import com.nwafu.itempool.beans.SingleChoic;
 import com.nwafu.itempool.model.AddPaperListModel;
 import com.nwafu.organizepaper.service.*;
 import net.sf.json.JSONObject;
@@ -80,9 +78,6 @@ public class OrganizationController {
     @PostMapping("/addpaper")
     public Object addPaper(@RequestBody AddPaperListModel questlist) {
 
-
-        int sumScore = 0;
-        int serialnum = 0;
         int userId = questlist.getUserid();
         String papername = questlist.getName();
         List<Integer> singleIds = questlist.getSingleSelect();
@@ -93,84 +88,109 @@ public class OrganizationController {
 
         List<PaperInfo> paperInfoList = new ArrayList<>();
 
-        //校验
-        /**
-         * if (singleIds.size() != 10) {
-         *             JSONObject object = new JSONObject();
-         *             object.element("stat","no");
-         *             object.element("msg","选择题是数量不为10");
-         *         }
-         */
+        //试卷总分
+        int source = addQuestionsToList(paperInfoList, singleIds, multipleIds, fillBlankIds, trueOrFalseIds, quesAndAnsIds);
 
-        //插入paper
-        Paper paper = new Paper();
-        paper.setCreatorId(userId);
-        paper.setName(papername);
-        paperService.insertSelective(paper);
-        int paperId = paper.getId();
-
-        //组织单选题
-        for (int questionId : singleIds) {
-            serialnum++;
-            PaperInfo paperInfo = new PaperInfo();
-            paperInfo.setPaperId(paperId);
-            paperInfo.setSerialNumber(serialnum);
-            paperInfo.setTypeId(10001);
-            paperInfo.setQuestionId(questionId);
-            paperInfoList.add(paperInfo);
+        if (source != 100){
+            return new JSONObject().element("stat","no").element("msg","满分不为100，请重新选题");
         }
 
-        //组织多选题
-        for (int questionId : multipleIds) {
-            serialnum++;
-            PaperInfo paperInfo = new PaperInfo();
-            paperInfo.setPaperId(paperId);
-            paperInfo.setSerialNumber(serialnum);
-            paperInfo.setTypeId(10002);
-            paperInfo.setQuestionId(questionId);
-            paperInfoList.add(paperInfo);
-        }
-
-        //组织填空题
-        for (int questionId : fillBlankIds) {
-            serialnum++;
-            PaperInfo paperInfo = new PaperInfo();
-            paperInfo.setPaperId(paperId);
-            paperInfo.setSerialNumber(serialnum);
-            paperInfo.setTypeId(10003);
-            paperInfo.setQuestionId(questionId);
-            paperInfoList.add(paperInfo);
-        }
-
-        //组织判断题
-
-        for (int questionId : trueOrFalseIds) {
-            serialnum++;
-            PaperInfo paperInfo = new PaperInfo();
-            paperInfo.setPaperId(paperId);
-            paperInfo.setSerialNumber(serialnum);
-            paperInfo.setTypeId(10004);
-            paperInfo.setQuestionId(questionId);
-            paperInfoList.add(paperInfo);
-        }
-
-        //组织问答题
-        for (int questionId : quesAndAnsIds) {
-            serialnum++;
-            PaperInfo paperInfo = new PaperInfo();
-            paperInfo.setPaperId(paperId);
-            paperInfo.setSerialNumber(serialnum);
-            paperInfo.setTypeId(10005);
-            paperInfo.setQuestionId(questionId);
-            paperInfoList.add(paperInfo);
-        }
+        int paperId = addPaper(userId, papername);
+        addPaperAndSerialnumIntoPaperInfoList(paperId, paperInfoList);
 
         int res = paperInfoService.insertList(paperInfoList);
 
         if (res > 0) {
             return new JSONObject().element("stat", "ok");
         } else {
-            return "no";
+            return new JSONObject().element("stat","no").element("msg","创建试卷失败");
         }
+    }
+
+    private void addPaperAndSerialnumIntoPaperInfoList(int paperId, List<PaperInfo> paperInfoList) {
+        int serialnum = 1;
+
+        for (PaperInfo paperInfo : paperInfoList){
+            paperInfo.setPaperId(paperId);
+            paperInfo.setSerialNumber(serialnum);
+            serialnum++;
+        }
+    }
+
+    private int addPaper(int userId, String papername) {
+        //插入paper
+        Paper paper = new Paper();
+        paper.setCreatorId(userId);
+        paper.setName(papername);
+        paperService.insertSelective(paper);
+        return paper.getId();
+    }
+
+
+    /**
+     *
+     * @param paperInfoList
+     * @param singleIds
+     * @param multipleIds
+     * @param fillBlankIds
+     * @param trueOrFalseIds
+     * @param quesAndAnsIds
+     * @return 试题的总分
+     */
+    private int addQuestionsToList(List<PaperInfo> paperInfoList, List<Integer> singleIds, List<Integer> multipleIds, List<Integer> fillBlankIds, List<Integer> trueOrFalseIds, List<Integer> quesAndAnsIds) {
+        int source = 0;
+        //组织单选题
+        for (int questionId : singleIds) {
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setTypeId(10001);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+
+            //获取分数
+            source += singleChoiceService.getSingleById(questionId).getScore();
+        }
+
+        //组织多选题
+        for (int questionId : multipleIds) {
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setTypeId(10002);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+
+            source += multipleChoiceService.getMultipleById(questionId).getScore();
+        }
+
+        //组织填空题
+        for (int questionId : fillBlankIds) {
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setTypeId(10003);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+
+            source += fillBlankService.getFillBlankById(questionId).getScore();
+        }
+
+        //组织判断题
+
+        for (int questionId : trueOrFalseIds) {
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setTypeId(10004);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+
+            source += trueOrFalseServicel.getTrueOrFalseById(questionId).getScore();
+        }
+
+        //组织问答题
+        for (int questionId : quesAndAnsIds) {
+            PaperInfo paperInfo = new PaperInfo();
+            paperInfo.setTypeId(10005);
+            paperInfo.setQuestionId(questionId);
+            paperInfoList.add(paperInfo);
+
+            source += quesAndAnsService.getQuesAndAnsById(questionId).getScore();
+        }
+
+        return source;
     }
 }
