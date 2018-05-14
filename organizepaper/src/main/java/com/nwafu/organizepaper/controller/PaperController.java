@@ -22,19 +22,55 @@ public class PaperController {
     PaperService paperService;
 
     @PostMapping("/delete")
-    public int deletePaperById(int id){
+    public int deletePaperById(int id) {
         return paperService.deleteByPrimaryKey(id);
     }
 
-    @PostMapping("/getpaperwithid")
-    public Object getpapersWithUserId(int userId){
-       JSONObject jsonObject = new JSONObject();
+    @PostMapping("/getpaperwithuserid")
+    public Object getpapersWithUserId(int userId) {
+        JSONObject jsonObject = new JSONObject();
 
-       List<Paper> paperList = paperService.getPaperWithUserId(userId);
+        List<Paper> paperList = paperService.getPaperWithUserId(userId);
 
-       jsonObject.element("stat","ok");
-       jsonObject.element("data",paperList);
-       return jsonObject;
+        jsonObject.element("stat", "ok");
+        jsonObject.element("data", paperList);
+        return jsonObject;
+    }
+
+    @PostMapping("/getalltestpaper")
+    public Object getAllTestPaper() {
+        JSONObject jsonObject = new JSONObject();
+
+        List<Paper> paperList = paperService.getAllPaper();
+        jsonObject.element("stat", "ok");
+        jsonObject.element("data", paperList);
+
+        return jsonObject;
+    }
+
+    @PostMapping("/approve")
+    public Object approvePaper(int paperId){
+        JSONObject jsonObject = new JSONObject();
+        if (paperService.approvePaper(paperId) ==1){
+            jsonObject.element("stat", "ok");
+            jsonObject.element("msg", "审核通过");
+            return jsonObject;
+        }
+        jsonObject.element("stat","no");
+        return jsonObject;
+    }
+
+    @PostMapping("/auditnotpassed")
+    public Object auditNotPassed(int paperId){
+        JSONObject jsonObject = new JSONObject();
+        if (paperService.auditNotPassed(paperId) ==1){
+            jsonObject.element("stat", "ok");
+            jsonObject.element("msg", "审核不通过");
+            return jsonObject;
+        }
+        jsonObject.element("stat","no");
+        return jsonObject;
+
     }
 
 }

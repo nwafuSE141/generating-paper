@@ -2,6 +2,7 @@ package com.nwafu.organizepaper.service;
 
 import com.nwafu.itempool.beans.Paper;
 import com.nwafu.itempool.mapper.PaperMapper;
+import com.nwafu.itempool.model.PaperStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +30,50 @@ public class PaperService {
 
     public List<Paper> getPaperWithUserId(int userId) {
         List<Paper> list = paperMapper.selectWithUserId(userId);
+
+        formatPaperList(list);
+
+        return list;
+    }
+
+    private void formatPaperList(List<Paper> list) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (Paper paper : list){
             String data = dateFormat.format(paper.getCreateTime());
             paper.setCreateTimeFormat(data);
+
+            String status = PaperStatus.getName(paper.getState());
+            paper.setStatus(status);
         }
+    }
+
+    public List<Paper> getAllPaper() {
+        List<Paper> list = paperMapper.selectAll();
+
+        formatPaperList(list);
 
         return list;
+    }
+
+    public int approvePaper(int paperId) {
+        Paper paper = paperMapper.selectByPrimaryKey(paperId);
+        if (paper == null){
+            return 0;
+        }
+
+        paper.setState(PaperStatus.APPROVED.ordinal());
+
+        return paperMapper.updateByPrimaryKey(paper);
+    }
+
+    public int auditNotPassed(int paperId) {
+        Paper paper = paperMapper.selectByPrimaryKey(paperId);
+        if (paper == null){
+            return 0;
+        }
+
+        paper.setState(PaperStatus.AUDITNOTPASSED.ordinal());
+
+        return paperMapper.updateByPrimaryKey(paper);
     }
 }
