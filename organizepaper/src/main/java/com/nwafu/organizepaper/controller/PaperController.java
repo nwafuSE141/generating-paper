@@ -67,6 +67,7 @@ public class PaperController {
             jsonObject.element("stat", "ok");
             jsonObject.element("msg", "审核不通过");
             return jsonObject;
+
         }
         jsonObject.element("stat","no");
         return jsonObject;
