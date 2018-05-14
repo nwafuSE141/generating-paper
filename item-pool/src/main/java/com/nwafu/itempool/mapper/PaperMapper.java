@@ -20,4 +20,6 @@ public interface PaperMapper {
     int updateByPrimaryKey(Paper record);
 
     List<Paper> selectWithUserId(int userId);
+
+    List<Paper> selectAll();
 }

@@ -34,7 +34,8 @@ public class OrganizepaperApplication {
         properties.setProperty("offsetAsPageNum","true");
         properties.setProperty("rowBoundsWithCount","true");
         properties.setProperty("reasonable","true");
-        properties.setProperty("dialect","mysql");    //配置mysql数据库的方言
+        //配置mysql数据库的方言
+        properties.setProperty("dialect","mysql");
         pageHelper.setProperties(properties);
         return pageHelper;
     }

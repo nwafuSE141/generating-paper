@@ -4,4 +4,7 @@
     <select id="selectWithUserId" resultMap="BaseResultMap">
         select * from paper where creator_id = #{userId}
     </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from paper
+    </select>
 </mapper>
