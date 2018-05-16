@@ -22,4 +22,6 @@ public interface PaperMapper {
     List<Paper> selectWithUserId(int userId);
 
     List<Paper> selectAll();
+
+    List<Paper> selectWithStat(int stat);
 }

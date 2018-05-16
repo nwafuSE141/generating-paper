@@ -7,4 +7,7 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select * from paper
     </select>
+    <select id="selectWithStat" resultMap="BaseResultMap">
+        select * from paper where state=#{stat}
+    </select>
 </mapper>
