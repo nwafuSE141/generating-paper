@@ -48,28 +48,39 @@ public class PaperController {
         return jsonObject;
     }
 
-    @PostMapping("/approve")
-    public Object approvePaper(int paperId){
+    @PostMapping("/gettestpaperwithstat")
+    public Object getSubmitTestPaper(int stat) {
         JSONObject jsonObject = new JSONObject();
-        if (paperService.approvePaper(paperId) ==1){
+
+        List<Paper> paperList = paperService.getPaperWithStat(stat);
+        jsonObject.element("stat", "ok");
+        jsonObject.element("data", paperList);
+
+        return jsonObject;
+    }
+
+    @PostMapping("/approve")
+    public Object approvePaper(int paperId, int userId) {
+        JSONObject jsonObject = new JSONObject();
+        if (paperService.approvePaper(paperId, userId) == 1) {
             jsonObject.element("stat", "ok");
             jsonObject.element("msg", "审核通过");
             return jsonObject;
         }
-        jsonObject.element("stat","no");
+        jsonObject.element("stat", "no");
         return jsonObject;
     }
 
     @PostMapping("/auditnotpassed")
-    public Object auditNotPassed(int paperId){
+    public Object auditNotPassed(int paperId, int userId) {
         JSONObject jsonObject = new JSONObject();
-        if (paperService.auditNotPassed(paperId) ==1){
+        if (paperService.auditNotPassed(paperId, userId) == 1) {
             jsonObject.element("stat", "ok");
             jsonObject.element("msg", "审核不通过");
             return jsonObject;
 
         }
-        jsonObject.element("stat","no");
+        jsonObject.element("stat", "no");
         return jsonObject;
 
     }
