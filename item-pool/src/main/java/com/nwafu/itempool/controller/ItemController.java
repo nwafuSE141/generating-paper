@@ -88,7 +88,6 @@ public class ItemController {
 
     @PostMapping("/batchDelete")
     public ResponseBody batchDelete(Integer type, String ids) {
-        System.out.println(type);
         ids = ids.substring(0, ids.length() - 1);
         if (0 == type) {
             singleChoicService.batchDelete(ids);
@@ -108,7 +107,20 @@ public class ItemController {
 
     @PostMapping("/update")
     public ResponseBody update(UpdateRequest request) {
-        singleChoicService.update(request);
+        Integer type = request.getType();
+        if (0 == type) {
+            singleChoicService.update(request);
+        } else if (1 == type) {
+            multipleChoicService.update(request);
+        } else if (2 == type) {
+            fillBlankService.update(request);
+        } else if (3 == type) {
+            trueOrFalseService.update(request);
+        } else if (4 == type) {
+            quesAndAnsService.update(request);
+        } else {
+            return new ResponseBody(400, "no such type", null);
+        }
         return new ResponseBody();
     }
 }

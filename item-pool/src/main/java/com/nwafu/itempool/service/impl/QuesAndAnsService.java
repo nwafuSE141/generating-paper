@@ -52,6 +52,13 @@ public class QuesAndAnsService implements ItemService {
 
     @Override
     public void update(UpdateRequest request) {
-
+        QuesAndAns quesAndAns = quesAndAnsMapper.selectByPrimaryKey(request.getId());
+        quesAndAns.setDifficult(request.getDifficult());
+        quesAndAns.setCourseId(request.getCourseId());
+        quesAndAns.setPointId(request.getPointId());
+        quesAndAns.setQuestion(request.getQuestion());
+        quesAndAns.setAnswer(request.getAnswer());
+        quesAndAns.setFaq(request.getFaq());
+        quesAndAnsMapper.updateByPrimaryKeySelective(quesAndAns);
     }
 }

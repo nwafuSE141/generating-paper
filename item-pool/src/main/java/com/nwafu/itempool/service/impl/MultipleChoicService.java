@@ -52,6 +52,13 @@ public class MultipleChoicService implements ItemService {
 
     @Override
     public void update(UpdateRequest request) {
-
+        MultipleChoice multiChoic = multipleChoiceMapper.selectByPrimaryKey(request.getId());
+        multiChoic.setDifficult(request.getDifficult());
+        multiChoic.setCourseId(request.getCourseId());
+        multiChoic.setPointId(request.getPointId());
+        multiChoic.setQuestion(request.getQuestion());
+        multiChoic.setAnswer(request.getAnswer());
+        multiChoic.setFaq(request.getFaq());
+        multipleChoiceMapper.updateByPrimaryKeySelective(multiChoic);
     }
 }

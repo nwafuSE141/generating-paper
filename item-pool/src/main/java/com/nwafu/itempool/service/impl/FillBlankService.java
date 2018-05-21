@@ -52,6 +52,13 @@ public class FillBlankService implements ItemService {
 
     @Override
     public void update(UpdateRequest request) {
-
+        FillBlank fillBlank = fillBlankMapper.selectByPrimaryKey(request.getId());
+        fillBlank.setDifficult(request.getDifficult());
+        fillBlank.setCourseId(request.getCourseId());
+        fillBlank.setPointId(request.getPointId());
+        fillBlank.setQuestion(request.getQuestion());
+        fillBlank.setAnswer(request.getAnswer());
+        fillBlank.setFaq(request.getFaq());
+        fillBlankMapper.updateByPrimaryKeySelective(fillBlank);
     }
 }

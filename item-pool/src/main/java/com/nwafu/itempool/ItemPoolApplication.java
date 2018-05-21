@@ -23,8 +23,4 @@ public class ItemPoolApplication {
         SpringApplication.run(ItemPoolApplication.class, args);
     }
 
-    @GetMapping("/index")
-    public List<Chapter> index() {
-        return chapterMapper.select1();
-    }
 }

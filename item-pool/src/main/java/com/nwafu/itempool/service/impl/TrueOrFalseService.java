@@ -51,6 +51,13 @@ public class TrueOrFalseService implements ItemService {
 
     @Override
     public void update(UpdateRequest request) {
-
+        TrueOrFalse trueOrFalse = trueOrFalseMapper.selectByPrimaryKey(request.getId());
+        trueOrFalse.setDifficult(request.getDifficult());
+        trueOrFalse.setCourseId(request.getCourseId());
+        trueOrFalse.setPointId(request.getPointId());
+        trueOrFalse.setQuestion(request.getQuestion());
+        trueOrFalse.setAnswer(request.getAnswer());
+        trueOrFalse.setFaq(request.getFaq());
+        trueOrFalseMapper.updateByPrimaryKeySelective(trueOrFalse);
     }
 }
