@@ -1,6 +1,5 @@
 package com.nwafu.itempool.controller;
 
-import com.nwafu.itempool.beans.SingleChoic;
 import com.nwafu.itempool.module.BaseRequest;
 import com.nwafu.itempool.module.ResponseBody;
 import com.nwafu.itempool.module.UpdateRequest;
@@ -31,7 +30,8 @@ public class ItemController {
     private QuesAndAnsService quesAndAnsService;
 
     @GetMapping("/{type}")
-    public com.nwafu.itempool.module.ResponseBody getItems(@PathVariable Integer type, Integer courseId, Integer page, Integer limit) {
+    public com.nwafu.itempool.module.ResponseBody getItems(@PathVariable Integer type, Integer page, Integer limit) {
+        System.out.println("sad");
         List items = new ArrayList();
         if (0 == type) {
             items = singleChoicService.getItems();

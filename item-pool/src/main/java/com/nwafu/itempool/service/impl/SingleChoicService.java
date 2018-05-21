@@ -1,5 +1,7 @@
 package com.nwafu.itempool.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nwafu.itempool.beans.SingleChoic;
 import com.nwafu.itempool.mapper.SingleChoicMapper;
 import com.nwafu.itempool.module.BaseRequest;
@@ -18,6 +20,7 @@ public class SingleChoicService implements ItemService {
 
     @Override
     public List<SingleChoic> getItems() {
+        PageHelper.startPage(1, 2);
         List<SingleChoic> items = singleChoicMapper.selectAll();
         if (null != items) {
             return items;
