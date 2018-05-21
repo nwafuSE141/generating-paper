@@ -19,5 +19,5 @@ public interface ChapterMapper {
 
     int updateByPrimaryKey(Chapter record);
 
-    Chapter select1(Integer id);
+    List<Chapter> select1();
 }
