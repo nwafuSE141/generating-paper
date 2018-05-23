@@ -16,7 +16,6 @@ public class TeacherController {
 
     @PostMapping("/login")
     public ResponseBody checkLogin(String username, String password) {
-        System.out.println(username + "====" + password);
         Boolean checkLogin = teacherService.checkLogin(username, password);
         return new ResponseBody(checkLogin);
     }

@@ -31,7 +31,6 @@ public class ItemController {
 
     @GetMapping("/{type}")
     public com.nwafu.itempool.module.ResponseBody getItems(@PathVariable Integer type, Integer page, Integer limit) {
-        System.out.println(page + "=====" + limit);
         List items = new ArrayList();
         if (0 == type) {
             items = singleChoicService.getItems(page, limit);
