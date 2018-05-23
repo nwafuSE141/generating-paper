@@ -19,8 +19,8 @@ public class SingleChoicService implements ItemService {
     private SingleChoicMapper singleChoicMapper;
 
     @Override
-    public List<SingleChoic> getItems() {
-        PageHelper.startPage(1, 2);
+    public List<SingleChoic> getItems(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
         List<SingleChoic> items = singleChoicMapper.selectAll();
         if (null != items) {
             return items;

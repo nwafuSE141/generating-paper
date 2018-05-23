@@ -1,5 +1,6 @@
 package com.nwafu.itempool.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nwafu.itempool.beans.TrueOrFalse;
 import com.nwafu.itempool.mapper.TrueOrFalseMapper;
 import com.nwafu.itempool.module.BaseRequest;
@@ -16,7 +17,8 @@ public class TrueOrFalseService implements ItemService {
     @Autowired
     private TrueOrFalseMapper trueOrFalseMapper;
     @Override
-    public List getItems() {
+    public List getItems(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
         List<TrueOrFalse> items = trueOrFalseMapper.selectAll();
         if (null != items) {
             return items;

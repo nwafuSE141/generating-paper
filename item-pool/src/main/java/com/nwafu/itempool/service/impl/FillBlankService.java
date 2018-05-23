@@ -1,5 +1,6 @@
 package com.nwafu.itempool.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nwafu.itempool.beans.FillBlank;
 import com.nwafu.itempool.mapper.FillBlankMapper;
 import com.nwafu.itempool.module.BaseRequest;
@@ -17,7 +18,8 @@ public class FillBlankService implements ItemService {
     private FillBlankMapper fillBlankMapper;
 
     @Override
-    public List getItems() {
+    public List getItems(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
         List<FillBlank> items = fillBlankMapper.selectAll();
         if (null != items) {
             return items;

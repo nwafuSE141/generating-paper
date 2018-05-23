@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ItemService {
 
-    List getItems();
+    List getItems(Integer page, Integer limit);
 
     void insert(BaseRequest request);
 

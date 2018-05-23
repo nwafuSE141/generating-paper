@@ -11,4 +11,5 @@ public interface TeacherMapper {
 
     int insertSelective(Teacher record);
 
+    Teacher checkLogin(String username, String password);
 }

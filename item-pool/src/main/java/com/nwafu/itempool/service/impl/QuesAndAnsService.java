@@ -1,5 +1,6 @@
 package com.nwafu.itempool.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nwafu.itempool.beans.QuesAndAns;
 import com.nwafu.itempool.mapper.QuesAndAnsMapper;
 import com.nwafu.itempool.module.BaseRequest;
@@ -17,7 +18,8 @@ public class QuesAndAnsService implements ItemService {
     private QuesAndAnsMapper quesAndAnsMapper;
 
     @Override
-    public List getItems() {
+    public List getItems(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
         List<QuesAndAns> items = quesAndAnsMapper.selectAll();
         if (null != items) {
             return items;

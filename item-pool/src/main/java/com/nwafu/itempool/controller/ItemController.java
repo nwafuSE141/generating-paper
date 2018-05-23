@@ -31,18 +31,18 @@ public class ItemController {
 
     @GetMapping("/{type}")
     public com.nwafu.itempool.module.ResponseBody getItems(@PathVariable Integer type, Integer page, Integer limit) {
-        System.out.println("sad");
+        System.out.println(page + "=====" + limit);
         List items = new ArrayList();
         if (0 == type) {
-            items = singleChoicService.getItems();
+            items = singleChoicService.getItems(page, limit);
         } else if (1 == type) {
-            items = multipleChoicService.getItems();
+            items = multipleChoicService.getItems(page, limit);
         } else if (2 == type) {
-            items = fillBlankService.getItems();
+            items = fillBlankService.getItems(page, limit);
         } else if (3 == type) {
-            items = trueOrFalseService.getItems();
+            items = trueOrFalseService.getItems(page, limit);
         } else if (4 == type) {
-            items = quesAndAnsService.getItems();
+            items = quesAndAnsService.getItems(page, limit);
         } else {
             return new ResponseBody(400, "no such type", null);
         }

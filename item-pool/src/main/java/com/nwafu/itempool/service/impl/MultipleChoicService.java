@@ -1,5 +1,6 @@
 package com.nwafu.itempool.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nwafu.itempool.beans.MultipleChoice;
 import com.nwafu.itempool.mapper.MultipleChoiceMapper;
 import com.nwafu.itempool.module.BaseRequest;
@@ -17,7 +18,8 @@ public class MultipleChoicService implements ItemService {
     private MultipleChoiceMapper multipleChoiceMapper;
 
     @Override
-    public List getItems() {
+    public List getItems(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
         List<MultipleChoice> items = multipleChoiceMapper.selectAll();
         if (null != items) {
             return items;
