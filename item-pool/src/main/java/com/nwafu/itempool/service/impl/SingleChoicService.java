@@ -22,6 +22,8 @@ public class SingleChoicService implements ItemService {
     public List<SingleChoic> getItems(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         List<SingleChoic> items = singleChoicMapper.selectAll();
+//        PageInfo<SingleChoic> pageInfo = new PageInfo<>(items);
+//        items = pageInfo.getList();
         if (null != items) {
             return items;
         }

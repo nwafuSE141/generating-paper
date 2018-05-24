@@ -13,8 +13,8 @@ public class BaseTeacherService implements TeacherService {
     private TeacherMapper teacherMapper;
 
     @Override
-    public Boolean checkLogin(String username, String password) {
+    public Teacher checkLogin(String username, String password) {
         Teacher teacher = teacherMapper.checkLogin(username, password);
-        return teacher != null;
+        return teacher;
     }
 }
